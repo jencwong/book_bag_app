@@ -1,0 +1,35 @@
+<% include ../partials/htmlHead.ejs %>
+<body>
+  <h2>New Book Form</h2>
+  <form action="/books" method="POST">
+    <fieldset>
+      <label for="title">Title: </label>
+      <input type="text" name="title" /><br />
+      <label for="author">Author: </label>
+      <input type="text" name="author" /><br />
+      <label for="category" name="category">Category: </label>
+      <input
+        type="text"
+        name="category"
+        placeholder="fiction/nonfiction"
+      /><br />
+      <label for="genre">Genre: </label>
+      <input type="text" name="genre" /><br />
+      <label for="quantity">Quantity: </label>
+      <input type="number" name="quantity" placeholder="numeric" /><br />
+      <label for="reading_level">Guided Reading Level(GRL): </label>
+      <input type="text" name="reading_level" /><br />
+      <label for="tags">Tags: </label>
+      <input type="text" name="tags" /><br />
+      <label for="image">Image path: </label>
+      <input
+        type="text"
+        name="image"
+        placeholder="Insert image URL here"
+      /><br />
+      <input type="submit" name="" value="Create Book" /><br />
+    </fieldset>
+  </form>
+
+  <% include ../partials/htmlFoot.ejs%>
+</body>

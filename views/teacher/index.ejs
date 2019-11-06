@@ -1,10 +1,16 @@
 <% include ../partials/htmlHead.ejs %>
 <body>
   <% include ../partials/htmlNav.ejs %>
+
+<a href="/books/newBook">Create a New Book</a>
+
   <%for(let i=0; i<books.length; i++){%>
   <ul>
-    <li><%=books[i].title%> Reading level: <%=books[i].reading_level%>
+    <li><a href="/books/<%=books[i].id; %>"><%=books[i].title%></a> <br>
+        <img class="index-image" src="<%=books[i].image%>"><br>
+        Reading level: <%=books[i].reading_level%>
     </li>
   </ul>
   <%}%>
+  <% include ../partials/htmlFoot.ejs%>
 </body>
