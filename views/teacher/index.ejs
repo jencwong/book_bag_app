@@ -1,0 +1,10 @@
+<% include ../partials/htmlHead.ejs %>
+<body>
+  <% include ../partials/htmlNav.ejs %>
+  <%for(let i=0; i<books.length; i++){%>
+  <ul>
+    <li><%=books[i].title%> Reading level: <%=books[i].reading_level%>
+    </li>
+  </ul>
+  <%}%>
+</body>
