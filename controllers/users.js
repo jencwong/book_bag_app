@@ -3,6 +3,7 @@ const userRouter = express.Router();
 
 // MODEL
 const User = require("../models/userModel.js");
+const Book = require("../models/bookModel.js");
 
 // ROUTES //////////////////////////////////////////
 // Index Get Route
@@ -21,6 +22,42 @@ userRouter.get("/classroom", (req, res) => {
   });
 });
 
+// route for teacher after loggin in
+userRouter.get("/teacher", (req, res) => {
+  res.render("../views/teacher/mainTeacher.ejs");
+  // res.render('')
+});
+
+// route for student after loggin in
+userRouter.get("/student/:stuID", (req, res) => {
+  User.findById(req.params.stuID, (err, foundStudent) => {
+    console.log(foundStudent.reading_level);
+    const student_rlvl = foundStudent.reading_level;
+    Book.find({ reading_level: student_rlvl }, (err, foundBooks) => {
+      console.log(foundBooks.reading_level);
+    });
+  });
+});
+
+//   User.findOne(
+//     { reading_level: req.body.reading_level },
+//     (err, foundStudent) => {
+//       console.log(
+//         `${req.body.reading_level} vs. ${foundStudent.reading_level}`
+//       );
+//     }
+//   );
+// });
+// query bookModel to find all books
+// console.log("student lvl", req.params.stuID);
+//   const currentStudent = req.params.stuID;
+//   console.log(currentStudent.reading_level);
+//   res.render("../views/users/mainStudent.ejs"), {};
+// Book.findOne(req.body.reading_level);
+//     res.render("../views/users/mainStudent.ejs", {
+//       currentStudent: foundStudent
+// });
+
 // user authentication route
 userRouter.post("/main", (req, res) => {
   console.log("login");
@@ -34,23 +71,18 @@ userRouter.post("/main", (req, res) => {
       } else {
         console.log("Student!");
         // res.redirect("/home/student");
-        res.render("../views/users/mainStudent.ejs", {
-          currentStudent: foundUser
-        });
+        // res.render("../views/users/mainStudent.ejs", {
+        //   currentStudent: foundUser
+        // });
+        // const rLvl = foundUser.reading_level;
+        // console.log("redir lvl", rLvl);
+        const stuID = foundUser.id;
+        res.redirect(`/home/student/${stuID}`);
       }
     } else {
       res.redirect("/home");
     }
   });
-});
-
-userRouter.get("/teacher", (req, res) => {
-  res.render("../views/teacher/mainTeacher.ejs");
-  // res.render('')
-});
-
-userRouter.get("/student", (req, res) => {
-  res.render("../views/users/mainStudent.ejs");
 });
 
 //   // res.send("connected")

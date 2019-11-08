@@ -3,10 +3,15 @@
 <body>
   <% include ../partials/htmlNav.ejs %>
 
-  <div id="test">Hi Jennie</div>
+  <!-- <div id="test">Hi Jennie</div> -->
 
-  <a href="/books/newBook">Create a New Book</a>
+  <a href="/books/newBook">Create a New Book</a><br>
+  <a href="/home/teacher">Back to Classroom</a>
 
+  
+  
+  <h2>Book Library</h2>
+  
   <%for(let i=0; i<books.length; i++){%>
   <ul class="container">
     <li><a href="/books/<%=books[i].id; %>"><%=books[i].title%></a> <br>

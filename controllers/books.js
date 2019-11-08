@@ -3,6 +3,7 @@ const bookRouter = express.Router();
 
 // MODEL
 const Book = require("../models/bookModel.js");
+
 // Routes //////////////////////////////////
 // Index Get Route for all books
 bookRouter.get("/", (req, res) => {
