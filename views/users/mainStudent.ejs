@@ -6,8 +6,9 @@
 
   <ul>
     Here is your reading list: 
-    <%for(i=0; i<currentStudent.book_bag.length; i++){%>
-    <%=currentStudent.book_bag[i].title%>
+    <%for(i=0; i<books.length; i++){%>
+      <li>
+    <%=books[i].title%></li>
     <%}%>
   </ul>
 

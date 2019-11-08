@@ -575,7 +575,7 @@ const addBookToStudent = async () => {
   }
 };
 
-addBookToStudent();
+// addBookToStudent();
 
 module.exports = {
   seedBooks,

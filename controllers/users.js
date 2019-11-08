@@ -31,11 +31,24 @@ userRouter.get("/teacher", (req, res) => {
 // route for student after loggin in
 userRouter.get("/student/:stuID", (req, res) => {
   User.findById(req.params.stuID, (err, foundStudent) => {
-    console.log(foundStudent.reading_level);
-    const student_rlvl = foundStudent.reading_level;
-    Book.find({ reading_level: student_rlvl }, (err, foundBooks) => {
-      console.log(foundBooks.reading_level);
-    });
+    if (err) {
+      console.log("Find Student Error", err);
+    } else {
+      console.log(foundStudent.reading_level);
+      const student_rlvl = foundStudent.reading_level;
+
+      Book.find({ reading_level: student_rlvl }, (err, foundBookLevel) => {
+        if (err) {
+          console.log("Find book error", err);
+        } else {
+          console.log(foundBookLevel);
+          res.render("../views/users/mainStudent.ejs", {
+            currentStudent: foundStudent,
+            books: foundBookLevel
+          });
+        }
+      });
+    }
   });
 });
 
