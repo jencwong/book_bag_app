@@ -462,18 +462,17 @@ const seedClass = [
 // Seeding function
 const seedDB = () => {
   // Declare db name, URI, and instantiate connection
-  const dbName = "bookbagdb";
-  const dbURI = `mongodb://localhost:27017/${dbName}`;
-  const dbConnection = mongoose.connection;
+  // Database
+  const MONGODB_URI =
+    process.env.MONGODB_URI || "mongodb://localhost/bookbagdb";
 
-  // Error handling for mongoose connection
-  dbConnection.on("error", err => console.log("DB Connection Error: ", err));
-  dbConnection.on("connected", () => console.log("DB Connected to: ", dbURI));
-  dbConnection.on("disconnected", () => console.log("DB Disconnected"));
-
-  mongoose.connect(dbURI, { useNewUrlParser: true }, () =>
-    console.log(`${dbName} db running on ${dbURI}`)
-  );
+  // connect Mongoose
+  mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true
+  });
+  mongoose.connection.once("open", () => {
+    console.log("connected to mongo");
+  });
 
   // Drop all collections first to avoid duplicate data
   BookModel.collection.drop();
@@ -494,13 +493,13 @@ const seedDB = () => {
     } else {
       console.log("Seeding OK: ", newClass);
 
-      // seedDB();
-
       // after creating the users, we will call the function that updates the USERS to include the proper books from our BOOKS collections, into the USERS book bag.
       // updateUsersBookBag();
     }
   });
 };
+
+seedDB();
 
 // the function for updating user to add books that correspond to the user's reading level to the book bag
 // const updateUsersBookBag = () => {
@@ -526,54 +525,54 @@ const seedDB = () => {
 //   });
 // };
 
-const addBookToStudent = async () => {
-  try {
-    const dbName = "bookbagdb";
-    const dbURI = `mongodb://localhost:27017/${dbName}`;
-    const dbConnection = mongoose.connection;
+// const addBookToStudent = async () => {
+//   try {
+//     const dbName = "bookbagdb";
+//     const dbURI = `mongodb://localhost:27017/${dbName}`;
+//     const dbConnection = mongoose.connection;
 
-    // Error handling for mongoose connection
-    dbConnection.on("error", err => console.log("DB Connection Error: ", err));
-    dbConnection.on("connected", () => console.log("DB Connected to: ", dbURI));
-    dbConnection.on("disconnected", () => console.log("DB Disconnected"));
+//     // Error handling for mongoose connection
+//     dbConnection.on("error", err => console.log("DB Connection Error: ", err));
+//     dbConnection.on("connected", () => console.log("DB Connected to: ", dbURI));
+//     dbConnection.on("disconnected", () => console.log("DB Disconnected"));
 
-    mongoose.connect(dbURI, { useNewUrlParser: true }, () =>
-      console.log(`${dbName} db running on ${dbURI}`)
-    );
+//     mongoose.connect(dbURI, { useNewUrlParser: true }, () =>
+//       console.log(`${dbName} db running on ${dbURI}`)
+//     );
 
-    await UserModel.find({ reading_level: "O" }, (err, foundOStudents) => {
-      if (err) {
-        console.log(err);
-      } else {
-        // console.log(foundOStudents);
-        BookModel.find({ reading_level: "O" }, (err, foundOBooks) => {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(foundOBooks);
+//     await UserModel.find({ reading_level: "O" }, (err, foundOStudents) => {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         // console.log(foundOStudents);
+//         BookModel.find({ reading_level: "O" }, (err, foundOBooks) => {
+//           if (err) {
+//             console.log(err);
+//           } else {
+//             console.log(foundOBooks);
 
-            foundOBooks.forEach(book => {
-              console.log("each", book);
+//             foundOBooks.forEach(book => {
+//               console.log("each", book);
 
-              foundOStudents.forEach(stu => {
-                UserModel.update(
-                  stu,
-                  { $push: { book_bag: book } },
-                  (err, updated) => {
-                    if (err) console.log(err);
-                    console.log(updated);
-                  }
-                );
-              });
-            });
-          }
-        });
-      }
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+//               foundOStudents.forEach(stu => {
+//                 UserModel.update(
+//                   stu,
+//                   { $push: { book_bag: book } },
+//                   (err, updated) => {
+//                     if (err) console.log(err);
+//                     console.log(updated);
+//                   }
+//                 );
+//               });
+//             });
+//           }
+//         });
+//       }
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 // addBookToStudent();
 
