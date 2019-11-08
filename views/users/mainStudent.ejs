@@ -8,8 +8,22 @@
     Here is your reading list: 
     <%for(i=0; i<books.length; i++){%>
       <li>
-    <%=books[i].title%></li>
-    <%}%>
+    <%=books[i].title%>
+  <!-- add a button form to borrow books here -->
+<% if(books.quantity <= 0 ){ %>
+  <p>Not Available</p>
+<%} else {%>
+<form action="/home/student/<%=currentStudent.id%>/books/<%=books.id%>borrow?_method=PUT" method="POST">
+<fieldset>
+  <label for="borrow"><%=books[i].quantity%> available
+  </label>
+  <input type="number" name="borrow" id="borrow"  value="<%=books[i].quantity%>"/>
+  <input type="submit" value="BORROW"/>
+</fieldset>
+</form>
+<%}%>
+</li>
+<%}%>
   </ul>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

@@ -98,6 +98,27 @@ userRouter.post("/main", (req, res) => {
   });
 });
 
+// set up book bag route
+userRouter.put("/student/:studId/books/:bookid", (req, res) => {
+  let bookQty = req.body.quantity;
+  req.body.quantity -= 1;
+  bookQty = req.body.quantity;
+  Book.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, updatedQty) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("../views/users/mainStudent.ejs", {
+          book: updatedBook
+        });
+      }
+    }
+  );
+});
+
 //   // res.send("connected")
 //   User.find({ account_type: "student" }, (error, allStudents) => {
 //     if (error) {
