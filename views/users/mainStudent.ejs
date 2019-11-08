@@ -1,0 +1,13 @@
+<% include ../partials/htmlHead.ejs %>
+<body>
+  <h2 id="greet">Hello <%=currentStudent.first_name%>!</h2>
+  <h3>Here is your reading list:</h3>
+  <ul>
+    <%=currentStudent.reading_level%>
+  </ul>
+
+  <h2><%=currentStudent.book_bag[0].title%></h2>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/scripts/main.js"></script>
+</body>

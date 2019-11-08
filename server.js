@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 
 // connect Mongoose
-mongoose.connect("mongodb://localhost:27017/basiccrud", {
+mongoose.connect("mongodb://localhost:27017/bookbagdb", {
   useNewUrlParser: true
 });
 mongoose.connection.once("open", () => {
@@ -17,13 +17,14 @@ mongoose.connection.once("open", () => {
 
 // controllers
 const booksController = require("./controllers/books.js");
-const seedBooks = require("./models/seed.js");
+const usersController = require("./controllers/users.js");
 
 // middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 app.use("/books", booksController);
+app.use("/home", usersController);
 
 // check root connection
 app.get("/", (req, res) => {

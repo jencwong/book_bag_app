@@ -1,0 +1,13 @@
+<% include ../partials/htmlHead.ejs%> <% include ../partials/htmlHeader.ejs%>
+
+<body>
+  <form action="/home/main" method="POST">
+    <fieldset>
+      <label for="username">Enter your username: </label>
+      <input type="text" name="username" /><br />
+      <label for="password">Enter your password: </label>
+      <input type="text" name="password" /><br />
+      <input type="submit" value="Submit" /> <br />
+    </fieldset>
+  </form>
+</body>
