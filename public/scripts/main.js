@@ -20,6 +20,12 @@ $(() => {
       $("<button>")
         .addClass("showdetails")
         .appendTo($newRow);
+      //         $("<td>")
+      // //         .attr("id", "book_bag")
+      // //         .text("View book bag")
+      // //         .appendTo($neRow);
+      // //       // .wrapInner("<a>")
+      // //       // .link.attr("href", `/teacher/${student.id}/showBook`)
 
       //       // h1
       //       // img

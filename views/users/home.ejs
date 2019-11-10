@@ -1,24 +1,43 @@
 <% include ../partials/htmlHead.ejs %>
 
 <body>
-  <h2>Welcome to the Book Bag App!</h2>
-  <h3>Ready for a great read? Log in below or sign up: </h3>
+  <header>
+    <main>
+      <!-- <div class="header_img"></div> -->
 
+      <section class="header">
+        <div class="container">
+          <a id="log-in" href="/home/log-in">
+            <img id="header_logo" src="/images/BookBagApp.png"
+          /></a>
+
+          <!-- <h1 class="title">
+            The Book Bag
+          </h1>
+          <p class="subtitle">
+            Welcome to the  <strong>Book Bag App</strong>!
+          </p>
+          -->
+        </div>
+      </section>
+    </main>
+  </header>
+
+  <!-- <h2>Welcome to the Book Bag App!</h2>
+  <h3>Ready for a great read? Log in below or sign up: </h3> -->
 
   <!-- <button onclick="location.href = '/sign-up';" id="sign-up">Sign Up</button></br> -->
 
-  <button onclick="location.href ='/home/log-in';" id="log-in">Log In</button></br>
-
-
+  <!-- <button onclick="location.href ='/home/log-in';" id="log-in">Log In</button></br> -->
 
   <!-- <button type></button> <br />
 
   <button></button><br /> -->
 
-  <p>
+  <!-- <p>
     “The more that you read, the more things you will know. The more that you
     learn, the more places you’ll go.” – Dr. Seuss
-  </p>
+  </p> -->
 
   <% include ../partials/htmlFoot.ejs%>
 </body>

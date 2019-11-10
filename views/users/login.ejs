@@ -1,13 +1,57 @@
-<% include ../partials/htmlHead.ejs%> <% include ../partials/htmlHeader.ejs%>
+<% include ../partials/htmlHead.ejs%>
 
 <body>
+  <% include ../partials/htmlHeader.ejs%>
+
   <form action="/home/main" method="POST">
-    <fieldset>
-      <label for="username">Enter your username: </label>
-      <input type="text" name="username" /><br />
-      <label for="password">Enter your password: </label>
-      <input type="text" name="password" /><br />
-      <input type="submit" value="Submit" /> <br />
-    </fieldset>
+    <div class="container is-fluid">
+      <fieldset id="form-login">
+        <h2>Sign in:</h2>
+        <!-- <div class="columns is-mobile is-centered"> -->
+        <div class="field">
+          <!-- <label class="label" for="username">Enter your username: </label> -->
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input is-success"
+              type="text"
+              name="username"
+              placeholder="Username"
+            /><br />
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <!-- <label class="label" for="password">Enter your password: </label> -->
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input is-success"
+              type="text"
+              name="password"
+              placeholder="Password"
+            /><br />
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- <label for="username">Enter your username: </label>
+      <input type="text" name="username" /><br /> -->
+        <!-- <label for="password">Enter your password: </label>
+      <input type="text" name="password" /><br /> -->
+        <div class="buttons">
+          <input
+            class="button is-primary is-medium"
+            type="submit"
+            id="loginbutton"
+            value="Submit"
+          />
+          <br />
+        </div>
+      </fieldset>
+    </div>
   </form>
 </body>

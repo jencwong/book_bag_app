@@ -24,8 +24,12 @@ userRouter.get("/classroom", (req, res) => {
 
 // route for teacher after loggin in
 userRouter.get("/teacher", (req, res) => {
-  res.render("../views/teacher/mainTeacher.ejs");
-  // res.render('')
+  User.find({ account_type: "student" }, (error, foundData) => {
+    res.render("../views/teacher/mainTeacher.ejs", {
+      student: foundData
+    });
+    // res.render('')
+  });
 });
 
 // // route for teacher to view student's book bag
@@ -138,8 +142,8 @@ userRouter.put("/student/:stuID/books/:bookID/borrow", (req, res) => {
             } else {
               User.findByIdAndUpdate(
                 req.params.stuID,
-                req.body,
-                // { $push: { book_bag: "Pippi Longstockings" } },
+                // req.body,
+                { $push: { book_bag: foundBook.title } },
                 { new: true },
                 (err, foundStudent) => {
                   if (err) {
