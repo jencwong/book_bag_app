@@ -17,9 +17,20 @@ $(() => {
         .addClass("reading_level")
         .text(student.reading_level)
         .appendTo($newRow);
-      $("<button>")
-        .addClass("showdetails")
-        .appendTo($newRow);
+      $("<td>")
+        .addClass("students_book_bag")
+        .text(student.book_bag)
+        .appendTo($newRow)
+        .wrapInner($("<a>").attr("href", `/teacher/${student._id}/showBook`));
+
+      // $("<button>")
+      //   .addClass("showdetails")
+      //   .appendTo($newRow);
+
+      // $("<td>")
+      // .addClass("book_bag")
+      // .text(student.book_bag[i]
+      // .appendTo($neRow);
       //         $("<td>")
       // //         .attr("id", "book_bag")
       // //         .text("View book bag")
