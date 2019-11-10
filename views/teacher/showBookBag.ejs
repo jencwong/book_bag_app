@@ -1,0 +1,11 @@
+<% include ../partials/htmlHead.ejs %>
+
+<body>
+<h2><%=currentStudent.first_name%>, is reading: </h2>
+<% for(i=0; i<currentStudent.book_bag.length; i++){%>
+    <ul><li>
+        <%=currentStudent.book_bag[i]%>
+    </li></ul>
+    
+<%}%>
+</body>

@@ -26,6 +26,7 @@ const usersController = require("./controllers/users.js");
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
+app.use(express.json());
 app.use("/books", booksController);
 app.use("/home", usersController);
 

@@ -313,6 +313,73 @@ const seedBooks = [
     reading_level: "G",
     tags: ["animal", "dog", "puppy", "pet"],
     image: "/images/JumpPupCover.png"
+  },
+  {
+    title: "A to Z Mysteries: The Absent Author",
+    author: "Ron Roy",
+    category: "Fiction",
+    genre: ["Mystery and Suspense"],
+    quantity: 5,
+    reading_level: "N",
+    tags: ["Detective", "Investigation", "Teamwork", "Cleverness", "series"],
+    image: "/images/TheAbsentAuthorCover.png"
+  },
+  {
+    title: "What If You Had: An Animal Nose!?",
+    author: "Sandra Markle",
+    category: "Fiction",
+    genre: ["Informational text", "Comedy", "Humor"],
+    quantity: 3,
+    reading_level: "M",
+    tags: ["Animal behavior", "Creativity", "Imagination", "series"],
+    image: "/images/AnAnimalNoseCover.png"
+  },
+  {
+    title: "The Berenstain Bears: Go Out to Eat",
+    author: "Jan Berenstain",
+    category: "Fiction",
+    genre: ["Family", "Humor"],
+    quantity: 5,
+    reading_level: "M",
+    tags: ["Animal", "Family Life", "Berenstain", "Bears", "series"],
+    image: "/images/BerenstainCover.png"
+  },
+  {
+    title: "Wildlife Conservation Society - Amazing Tigers!",
+    author: "Sarah L. Thomson",
+    category: "Nonfiction",
+    genre: ["Informational Text"],
+    quantity: 5,
+    reading_level: "N",
+    tags: ["Animal", "Endangered Animal", "Conservation", "Tigers", "series"],
+    image: "/images/WildlifeTigerCover.png"
+  },
+  {
+    title: "I Like To Read: Fix This Mess!",
+    author: "Tedd Arnold",
+    category: "Fiction",
+    genre: ["Comedy", "Humor", "Science Fiction"],
+    quantity: 2,
+    reading_level: "G",
+    tags: ["Robots", "Robotics", "Chores", "series"],
+    image: "/images/FixThisMessCover.png"
+  },
+  {
+    title: "Dream Big: Michael Jordan and the Pursuit of Excellence",
+    author: "Deloris Jordan",
+    category: "Nonfiction",
+    genre: ["Biography", "Autobiography"],
+    quantity: 2,
+    reading_level: "M",
+    tags: [
+      "Achievement",
+      "Success",
+      "Setting Goals",
+      "Basketball",
+      "sports",
+      "sport figures"
+    ],
+    image: "/images/DreamBigJordanCover.png"
   }
 ];
 
@@ -385,7 +452,7 @@ const seedClass = [
     password: "md2030-7",
     account_type: "student",
     book_bag: [],
-    reading_level: "M"
+    reading_level: "G"
   },
   {
     first_name: "Brady",

@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     account_type: { type: String, required: true },
     // book_bag: [bookSchema],
-    book_bag: [],
+    book_bag: [String],
     reading_level: String
   },
   { timeStamps: true }

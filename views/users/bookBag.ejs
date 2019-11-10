@@ -1,0 +1,14 @@
+<% include ../partials/htmlHead.ejs %>
+
+<body>
+
+  <h2><%=currentStudent.first_name%>, you have this book in your book bag:</h2>
+  <br />
+  <ul>
+    <%for(i=0; i<currentStudent.book_bag.length; i++){%>
+    <li><%=currentStudent.book_bag[i]%></li></br>
+    <%}%>
+  </ul>
+
+  <a href="/home/student/<%=currentStudent.id%>">Back to Main Page</a><br />
+</body>
