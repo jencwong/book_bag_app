@@ -86,12 +86,12 @@
     
   
 
-  <h1 id="h1_index">Book Library</h1>
+  <h1>Book Library</h1>
   
   <ul class="container is-fluid columns is-multiline">
   <%for(let i=0; i<books.length; i++){%>
     <li class="column is-one-third">
-      <p><a  href="/books/<%=books[i].id; %>"><%=books[i].title%> </a></p>
+      <p><a href="/books/<%=books[i].id; %>"><%=books[i].title%> </a></p>
       <a href="/books/<%=books[i].id; %>">
       <img class="index-image" src="<%=books[i].image%>"></a>
       <p>Reading level: <%=books[i].reading_level%></p>

@@ -32,7 +32,8 @@ const userSchema = new mongoose.Schema(
     account_type: { type: String, required: true },
     // book_bag: [bookSchema],
     book_bag: [String],
-    reading_level: String
+    reading_level: String,
+    completed: [String]
   },
   { timeStamps: true }
 );

@@ -1,6 +1,7 @@
-<% include ../partials/htmlHead.ejs %>
+<% include ../partials/htmlHead.ejs%>
+
 <body>
-  <%include ../partials/htmlHeader.ejs%>
+  <% include ../partials/htmlHeader.ejs%>
   <div class="parent-container">
     <div class="tabs">
       <ul>
@@ -11,9 +12,7 @@
         >
           <div class="navbar-start">
             <li>
-              <a class="navbar-item" href="/books/<%=book.id;%>/editBook"
-                >Edit Book</a
-              >
+              <a class="navbar-item" href="/home/teacher">Classroom</a>
             </li>
           </div>
           <li><a class="navbar-item" href="/books/">Book Library</a></li>
@@ -26,10 +25,10 @@
             <a class="navbar-item" href="/home/teacher/edituser">Edit User</a>
           </li>
           <!-- <li>
-            <a class="navbar-item" href="/home/teacher/deleteuser"
-              >Delete User</a
-            >
-          </li> -->
+                      <a class="navbar-item" href="/home/teacher/deleteuser"
+                        >Delete User</a
+                      >
+                    </li> -->
 
           <div class="navbar-end">
             <!-- <div class="buttons"> -->
@@ -40,18 +39,24 @@
     </div>
 
     <div class="child-container">
-      <h1><%=book.title%></h1>
-      <img id="showbook" src="<%=book.image%>" />
-      <p>Number of copies available: <%=book.quantity%></p>
+      <h1>Student Report Page</h1>
+      <p>First name: <strong><%=currentStudent.first_name%></strong></p>
+      <p>Last name: <strong><%=currentStudent.last_name%></strong></p>
+      <p>Reading level: <strong><%=currentStudent.reading_level%></strong></p>
+      <p>In Book Bag: <strong><%=currentStudent.book_bag%></strong></p>
+      <p>Books completed: <strong><%=currentStudent.completed%></strong></p>
 
       <!-- Add Delete form here -->
-      <fieldset id="deletebook">
-        <form action="/books/<%=book.id%>?_method=DELETE" method="POST">
+      <fieldset id="deletestudent">
+        <form
+          action="/home/teacher/<%=currentStudent.id%>?_method=DELETE"
+          method="POST"
+        >
           <div class="buttons is-centered">
             <input
               class="button is-danger is-focused"
               type="submit"
-              value="Delete Book"
+              value="Delete Student"
             />
           </div>
         </form>

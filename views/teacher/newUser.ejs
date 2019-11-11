@@ -1,0 +1,133 @@
+<% include ../partials/htmlHead.ejs %>
+
+<body>
+  <% include ../partials/htmlHeader.ejs %>
+  <div class="parent-container">
+    <h1>New Student Form</h1>
+    <form action="/home/teacher" method="POST">
+      <fieldset id="newuser">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label" for="first_name">First name: </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input class="input" type="text" name="first_name" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label" for="author">Last Name: </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input class="input" type="text" name="last_name" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label" for="username">username: </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input class="input" type="text" name="username" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label" for="email">email: </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input class="input" type="text" name="email" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label" for="password">password: </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input class="input" type="text" name="password" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label" for="account_type">Account Type: </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control is-expanded">
+                <input
+                  class="input"
+                  type="text"
+                  name="account_type"
+                  placeholder="student/teacher"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label" for="book_bag">In Book Bag: </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control is-expanded">
+                <input class="input" type="text" name="book_bag" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-small">
+            <label class="label" for="reading_level"
+              >Guided Reading Level(GRL):
+            </label>
+          </div>
+          <div class="field is-narrow">
+            <div class="control">
+              <input class="input" type="text" name="reading_level" />
+            </div>
+          </div>
+        </div>
+
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label" for="completed">Completed: </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control is-expanded">
+                <input class="input" type="text" name="completed" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</body>

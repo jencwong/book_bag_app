@@ -1,20 +1,60 @@
 <% include ../partials/htmlHead.ejs %>
 
 <body>
-  <table id="reading_report" style="width:100%">
-    <tr>
-      <th class="firstname">Firstname</th>
-      <th class="lastname">Lastname</th>
-      <th class="reading_level">Reading Level</th>
-      <th class="students_book_bag">Currently Reading:</th>
-    </tr>
-  </table>
+  <% include ../partials/htmlHeader.ejs %>
+  <div class="parent-container">
+    <div class="tabs">
+      <ul>
+        <nav
+          class="navbar columns"
+          role="navigation"
+          aria-label="main navigation"
+        >
+          <div class="navbar-start">
+            <li><a class="navbar-item" href="/books/">Book Library</a></li>
+          </div>
+          <li>
+            <a class="navbar-item" href="/home/teacher/newuser"
+              >Setup a New User</a
+            >
+          </li>
+          <li>
+            <a class="navbar-item" href="/home/teacher/edituser">Edit User</a>
+          </li>
+          <!-- <li>
+            <a class="navbar-item" href="/home/teacher/deleteuser"
+              >Delete User</a
+            >
+          </li> -->
 
-  <nav>
-    <a href="/books">View Book Library</a><br />
-    <a href="/home">Log Out</a>
-  </nav>
+          <div class="navbar-end">
+            <!-- <div class="buttons"> -->
+            <li><a class="navbar-item is-light" href="/home">Log Out</a></li>
+          </div>
+        </nav>
+      </ul>
+    </div>
 
+    <h1>Class Reading Report</h1>
+
+    <table
+      class="table is-bordered is-striped is-hoverable"
+      id="reading_report"
+      style="width:100%"
+    >
+      <tr class="is-selected">
+        <th class="firstname">Firstname</th>
+        <th class="lastname">Lastname</th>
+        <th class="reading_level">Reading Level</th>
+        <th class="students_book_bag">Currently Reading:</th>
+      </tr>
+    </table>
+
+    <!-- <nav>
+      <a href="/books">View Book Library</a><br />
+      <a href="/home">Log Out</a>
+    </nav> -->
+  </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="/scripts/main.js"></script>
 </body>

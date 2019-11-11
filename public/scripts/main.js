@@ -21,7 +21,7 @@ $(() => {
         .addClass("students_book_bag")
         .text(student.book_bag)
         .appendTo($newRow)
-        .wrapInner($("<a>").attr("href", `/teacher/${student._id}/showBook`));
+        .wrapInner($("<a>").attr("href", `/home/teacher/${student._id}`));
 
       // $("<button>")
       //   .addClass("showdetails")

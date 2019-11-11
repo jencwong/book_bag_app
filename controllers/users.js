@@ -32,6 +32,20 @@ userRouter.get("/teacher", (req, res) => {
   });
 });
 
+// route for teacher to setup a new student:
+userRouter.get("/teacher/newuser", (req, res) => {
+  res.render("../views/teacher/newUser.ejs");
+});
+
+// route for teacher to view specific student:
+userRouter.get("/teacher/:stuID", (req, res) => {
+  User.findById(req.params.stuID, req.body, (err, foundStudent) => {
+    res.render("../views/teacher/showStudent.ejs", {
+      currentStudent: foundStudent
+    });
+  });
+});
+
 // // route for teacher to view student's book bag
 // userRouter.get("/teacher/:stuID/showBook", (req, res) => {
 //   User.findById(req.params.stuID, (err, foundStudent) => {
