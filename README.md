@@ -1,69 +1,97 @@
 # book_bag_app
 
+Currently, my daughter who is in 2nd grade is assigned a reading level and a selection of books for the reading level. Suggested reading list is not available for student or parent to view. Additionally, there is no tracking system to record books that were completed. As a result, my daughter often brings home books she has read.
+
 The app is for schools to centralize the database of recommended reading list and for readers to use the database to pick books from the reading list, check the book availability, borrow, return books and track their reading list. The database will be categorized according to each student's reading level as well as the book's category: whether fiction or non-fiction.
 
-## App functions and feactures
-
-The book database schema will be structured as follows:
-title: String
-author: String
-category: String
-genre: String
-quantity: num
-reading_level: String
-tags: [String]
-Image: String
+## App functions and features
 
 On the student's side (client's side):
-Each student log in to view the reading list that his/her teacher has assigned (complete list)
-Students can search books by category/subcategory/tags.
-If the book is available, the student can check out the book (need a borrow button).
-If the book is not available, the student can be on the waitlist? (need a waitlist button).
-Borrowing period is one week. No renewal allowed.  
-If the book is not returned on time, students will be fined? (how to do this), or just send a reminder?
-Students can see his/her completed book list.
+Each student log in to view the reading list assigned based on the reading level.
+If the book is available, the student can put the book title in his book bag (this is the borrow button).
+If the book is not available, the not available button will appear.
+When the student returns the book, the book title will show up in the completed book list.
+Student will have two views:
 
-Maybe for future:
-Grade level
+1. The main view consists of reading list and completed list.
+2. The book bag view with the book title and a return button.
 
-Teachers log into the database and has the ability to customize the reading list to his/her class (adding, removing), however it will not affect the master list.  
-Teachers can view each student's completed books and make comments. (Do I need a separate dabatase for the class?).
-Teacher will require that each student complete XX books per category per term?
+Teachers log into the app with admin privilege. Teacher has access to
 
-On the student's side (client's side):
-Each student log in to view the reading list that his/her teacher has assigned (complete list)
-Students can search books by category/subcategory/tags.
-If the book is available, the student can check out the book (need a borrow button).
-If the book is not available, the student can be on the waitlist? (need a waitlist button).
-Borrowing period is one week. No renewal allowed.  
-If the book is not returned on time, students will be fined? (how to do this), or just send a reminder?
-Students can see his/her completed book list.
+1. View, add, edit, delete items in the book library
+2. View, add, edit, delete users for the app.
+
+Teacher have two separate index views:
+
+1. Book Library
+2. Classroom with all the students' name, reading level, and titles in the book bag.
 
 ### 7 RESTful Routes
 
+Teacher's account
+For the book model:
+1 Index: all the books with a get method
+2 Show: specific book with a get method
+3 New: teacher add new book to the library (with a get method)
+4 Create: create a new book to the library (post method)
+5 Edit: teacher sends edits of any of the book (get method)
+6 Update: send the updates with a put/post method
+7 Destroy: delete a specifid book with a delete method
+
+Teacher's account
+For the user model:
+1 Index: display all users with account type of student with a get method and jQuery (make an AJAX request on my own API)
+2 Show: specific student with a get method
+3 New: teacher add new user to the classroom (get method)
+4 Create: create a new user to the classroom (post method)
+5 Edit: teacher sends edits of any of the student's account (get method)
+6 Update: send the updates with a put/post method
+7 Destroy: delete a specifid user with a delete method
+
+Student's account:
+(Both User and Books model)
+
+1. Show: display a specific user's name, reading level with get method. Biven his/her reading level will pull all books on the corresponding reading level
+2. Edit: user edits his/her book bag by pushing book title (from book model) into the user's book bag (user model) with a put/post method.
+3. Edit: user edits his/her book bag and completed lists by returning titles in his book/bag and pushing the title into the completed list.
+
 ### Models
 
-### Mobile Responsiveness
+The book database schema will be structured as follows:
+title: { type: String, required: true },
+author: { type: String, required: true },
+category: { type: String, required: true },
+genre: [String],
+quantity: { type: Number, required: true },
+reading_level: { type: String, required: true },
+tags: [String],
+image: { type: String }
 
-### User Interface
+The app users schema is below:
+first_name: { type: String, required: true },
+last_name: { type: String, required: true },
+username: { type: String, required: true },
+email: { type: String, required: true },
+password: { type: String, required: true },
+account_type: { type: String, required: true },
+book_bag: [String],
+reading_level: String,
+completed: [String]
 
 ### Resources
 
-1. Dog gif is embedded from (GIPHY)[https://giphy.com/]
-
-2. The 3D dice and the dice face images are from (free-icons).[https://www.flaticon.com/free-icons/dice]
-
-3. The image of the trophy is from (free-icons).[https://www.flaticon.com/free-icons/dice]
-
-4. The graphic of the snake, dice and ladder is from (pngfly)[https://www.pngfly.com/png-00kll8/]
+1. Mongodb
+2. Express js
+3. all the npm packages, including method-override
+4. Bulma
 
 ### Deployment
 
-Add additional notes about how to deploy this on a live system
+Heroku app at [the book bag app](https://book-bag-app.herokuapp.com/home)
 
 ## Versioning
 
-Use gitHub for versioning. For the versions available, see the [the project repository](https://github.com/jencwong/snake-ladder).
+Use gitHub for versioning. For the versions available, see the [the project repository](https://github.com/jencwong/book_bag_app).
 
 ## Authors
 
@@ -71,7 +99,7 @@ Use gitHub for versioning. For the versions available, see the [the project repo
 
 ## Acknowledgments
 
-- Thanks to project instructor Leo for guiding with scope, milestones, and APIs.
-- Thans to Brian and Joem for helping along with CSS, jQuery and game logic.
-- Hat tip to anyone whose code was used, including GA SEI instructors' notes, w3 schools, jQuery, Stack Overflow.
-- Inspiration is from the Snake and Ladder Game Board.
+- Thanks to project instructor Kenny for guiding with scope, milestones, and APIs.
+- Thans to Joem for helping along with debuggin.
+- Hat tip to anyone whose code was used, including GA SEI instructors' notes, w3 schools, jQuery, Stack Overflow, MongoDB, Bulma
+- Inspiration is from my daughter's school.

@@ -228,62 +228,66 @@ userRouter.put("/student/:stuID/books/:bookID/borrow", (req, res) => {
 });
 
 // set up return book (edit) put route
-userRouter.put("/student/:stuID/books/:bookID/return", (req, res) => {
-  let bookQty = req.body.quantity;
-  req.body.quantity += 1;
-  bookQty = req.body.quantity;
-  Book.findByIdAndUpdate(
-    req.params.bookID,
-    req.body,
-    { new: true },
-    (err, updatedQty) => {
-      if (err) {
-        console.log(err);
-      } else {
-        let bookTitle = req.body.title;
-        Book.findByIdAndUpdate(
-          req.params.bookID,
-          req.body,
-          { new: true },
-          (err, foundBook) => {
-            if (err) {
-              console.log(err);
-            } else {
-              User.findByIdAndUpdate(
-                req.params.stuID,
-                // req.body,
-                {
-                  $pull: { book_bag: foundBook.title },
-                  $push: { completed: foundBook.title }
-                },
-                { new: true },
-                (err, foundStudent) => {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    // foundBook.forEach(book => {
-                    // foundStudent.book_bag.push(foundBook.title);
-                    console.log(foundStudent);
-                    console.log(foundStudent.completed);
-                    console.log(foundBook);
-                    const stuID = foundStudent.id;
-                    res.redirect(`/home/student/${stuID}`);
-                    // , {
-                    //   currentStudent: foundStudent,
-                    //   books: foundBook
+userRouter.put(
+  "/student/:stuID/:stuBookTitle/books/:bookTitle/return",
+  (req, res) => {
+    User.findByIdAndUpdate(
+      req.params.stuID,
+      // req.body,
+      { new: true },
+      (err, foundStudent) => {
+        if (err) {
+          console.log(err);
+        } else {
+          let foundBook = req.params.stuBookTitle;
+          User.findOneAndUpdate(
+            req.params.stuBookTitle,
+            {
+              $pull: { book_bag: foundBook.title },
+              $push: { completed: foundBook.title }
+            },
+            { new: true },
+            (err, foundBook) => {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log(foundStudent);
+                console.log(foundStudent.completed);
+                console.log(foundBook);
+                let bookTitle = foundBook.title;
+                Book.findOneAndUpdate(
+                  req.params.bookTitle,
+                  // req.body,
+                  { new: true },
+                  (err, foundBook) => {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      // let bookQty = req.body.quantity;
+                      // req.body.quantity += 1;
+                      // bookQty = req.body.quantity;
+                      console.log(foundStudent);
+                      console.log(foundStudent.completed);
+                      console.log(foundBook);
+                      const stuID = foundStudent.id;
+                      res.redirect(`/home/student/${stuID}`);
+                      // , {
+                      //   currentStudent: foundStudent,
+                      //   books: foundBook
 
-                    // res.redirect(`/home/student/${stuID}`);
+                      // res.redirect(`/home/student/${stuID}`);
+                    }
+                    // });
                   }
-                  // });
-                }
-              );
+                );
+              }
             }
-          }
-        );
+          );
+        }
       }
-    }
-  );
-});
+    );
+  }
+);
 
 // Edit Student Put Route
 userRouter.put("/teacher/:stuID", (req, res) => {

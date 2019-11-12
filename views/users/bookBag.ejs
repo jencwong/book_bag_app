@@ -30,9 +30,9 @@
     <%for(i=0; i<currentStudent.book_bag.length; i++){%>
     <li><%=currentStudent.book_bag[i]%>
       <!-- add a button to return books here -->
-    <form action="/home/student/<%=currentStudent.id%>/books/<%=books[i].id%>/return?_method=PUT" method="POST">
+    <form action="/home/student/<%=currentStudent.id%>/<%=currentStudent.book_bag[i]%>/books/<%=books.title%>/return?_method=PUT" method="POST">
       
-      <input type="number" name="quantity" id="return"  value="<%=books[i].quantity%>"/>
+      <input type="number" name="quantity" id="return"  value="<%=books.quantity%>"/>
       <input class="button is-primary" type="submit" value="RETURN"/>
 
     </form>
