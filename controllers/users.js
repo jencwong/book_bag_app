@@ -37,7 +37,20 @@ userRouter.get("/teacher/newuser", (req, res) => {
   res.render("../views/teacher/newUser.ejs");
 });
 
-// route for teacher to view specific student:
+// edit student get route
+userRouter.get("/teacher/:id/edituser", (req, res) => {
+  User.findById(req.params.id, (err, foundUser) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("../views/teacher/edituser.ejs", {
+        currentUser: foundUser
+      });
+    }
+  });
+});
+
+// route for teacher to view specific student (show student route):
 userRouter.get("/teacher/:stuID", (req, res) => {
   User.findById(req.params.stuID, req.body, (err, foundStudent) => {
     res.render("../views/teacher/showStudent.ejs", {
@@ -58,6 +71,7 @@ userRouter.get("/teacher/:stuID", (req, res) => {
 //     }
 //   });
 // });
+
 // route for student after loggin in
 userRouter.get("/student/:stuID", (req, res) => {
   User.findById(req.params.stuID, req.body, (err, foundStudent) => {
@@ -82,10 +96,22 @@ userRouter.get("/student/:stuID", (req, res) => {
   });
 });
 
-userRouter.get("/student/:studId/books/:bookId/borrow", (req, res) => {
-  res.render("../views/users/mainStudent");
+// route for student to view book bag
+userRouter.get("/student/:stuID/bookbag", (req, res) => {
+  Book.find({}, (err, foundBooks) => {
+    User.findById(req.params.stuID, (err, foundStudent) => {
+      res.render("../views/users/bookBag.ejs", {
+        books: foundBooks,
+        currentStudent: foundStudent
+      });
+    });
+  });
 });
 
+// route for students to return book
+userRouter.get("/student/:stuID/books/:bookID/return", (req, res) => {
+  res.send("Test");
+});
 //   User.findOne(
 //     { reading_level: req.body.reading_level },
 //     (err, foundStudent) => {
@@ -104,6 +130,8 @@ userRouter.get("/student/:studId/books/:bookId/borrow", (req, res) => {
 //     res.render("../views/users/mainStudent.ejs", {
 //       currentStudent: foundStudent
 // });
+
+// POST Routes
 
 // user authentication route
 userRouter.post("/main", (req, res) => {
@@ -132,7 +160,20 @@ userRouter.post("/main", (req, res) => {
   });
 });
 
-// // set up book bag put route
+// New User Post Route
+userRouter.post("/teacher", (req, res) => {
+  User.create(req.body, (error, createdUser) => {
+    if (error) {
+      res.send(error);
+    } else {
+      res.redirect("/home/teacher");
+    }
+  });
+});
+
+// PUT Routes ///////////
+
+// set up book bag put route
 userRouter.put("/student/:stuID/books/:bookID/borrow", (req, res) => {
   let bookQty = req.body.quantity;
   req.body.quantity -= 1;
@@ -164,7 +205,7 @@ userRouter.put("/student/:stuID/books/:bookID/borrow", (req, res) => {
                     console.log(err);
                   } else {
                     // foundBook.forEach(book => {
-                    foundStudent.book_bag.push(foundBook.title);
+                    // foundStudent.book_bag.push(foundBook.title);
                     console.log(foundStudent);
                     console.log(foundStudent.book_bag);
                     console.log(foundBook);
@@ -181,6 +222,80 @@ userRouter.put("/student/:stuID/books/:bookID/borrow", (req, res) => {
             }
           }
         );
+      }
+    }
+  );
+});
+
+// set up return book (edit) put route
+userRouter.put("/student/:stuID/books/:bookID/return", (req, res) => {
+  let bookQty = req.body.quantity;
+  req.body.quantity += 1;
+  bookQty = req.body.quantity;
+  Book.findByIdAndUpdate(
+    req.params.bookID,
+    req.body,
+    { new: true },
+    (err, updatedQty) => {
+      if (err) {
+        console.log(err);
+      } else {
+        let bookTitle = req.body.title;
+        Book.findByIdAndUpdate(
+          req.params.bookID,
+          req.body,
+          { new: true },
+          (err, foundBook) => {
+            if (err) {
+              console.log(err);
+            } else {
+              User.findByIdAndUpdate(
+                req.params.stuID,
+                // req.body,
+                {
+                  $pull: { book_bag: foundBook.title },
+                  $push: { completed: foundBook.title }
+                },
+                { new: true },
+                (err, foundStudent) => {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    // foundBook.forEach(book => {
+                    // foundStudent.book_bag.push(foundBook.title);
+                    console.log(foundStudent);
+                    console.log(foundStudent.completed);
+                    console.log(foundBook);
+                    const stuID = foundStudent.id;
+                    res.redirect(`/home/student/${stuID}`);
+                    // , {
+                    //   currentStudent: foundStudent,
+                    //   books: foundBook
+
+                    // res.redirect(`/home/student/${stuID}`);
+                  }
+                  // });
+                }
+              );
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
+// Edit Student Put Route
+userRouter.put("/teacher/:stuID", (req, res) => {
+  User.findByIdAndUpdate(
+    req.params.stuID,
+    req.body,
+    { new: true },
+    (error, updatedStudent) => {
+      if (error) {
+        console.log(error);
+      } else {
+        res.redirect("/home/teacher/");
       }
     }
   );
@@ -365,6 +480,16 @@ userRouter.put("/student/:stuID/books/:bookID/borrow", (req, res) => {
 //   });
 // });
 
-// Export
+// Delete Route
+userRouter.delete("/teacher/:stuID", (req, res) => {
+  User.findByIdAndRemove(req.params.stuID, (error, deletedStudent) => {
+    if (error) {
+      res.send(error);
+    } else {
+      res.redirect("/home/teacher");
+    }
+  });
+});
 
+// Export
 module.exports = userRouter;

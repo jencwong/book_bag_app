@@ -8,15 +8,18 @@ $(() => {
       $("<td>")
         .addClass("firstname")
         .text(student.first_name)
-        .appendTo($newRow);
+        .appendTo($newRow)
+        .wrapInner($("<a>").attr("href", `/home/teacher/${student._id}`));
       $("<td>")
         .addClass("lastname")
         .text(student.last_name)
-        .appendTo($newRow);
+        .appendTo($newRow)
+        .wrapInner($("<a>").attr("href", `/home/teacher/${student._id}`));
       $("<td>")
         .addClass("reading_level")
         .text(student.reading_level)
-        .appendTo($newRow);
+        .appendTo($newRow)
+        .wrapInner($("<a>").attr("href", `/home/teacher/${student._id}`));
       $("<td>")
         .addClass("students_book_bag")
         .text(student.book_bag)

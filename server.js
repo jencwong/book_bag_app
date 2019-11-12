@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000;
 console.log(process.env.PORT);
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+const bodyParser = require("body-parser");
 
 // Database
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/bookbagdb";
@@ -27,6 +28,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
+// below will parse urlencoded bodies
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use("/books", booksController);
 app.use("/home", usersController);
 

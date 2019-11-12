@@ -3,9 +3,9 @@
 <body>
   <% include ../partials/htmlHeader.ejs %>
   <div class="parent-container">
-    <h1>New Student Form</h1>
-    <form action="/home/teacher" method="POST">
-      <fieldset id="newuser">
+    <h1>Edit Student Form</h1>
+    <form action="/home/teacher/<%=currentUser.id%>?_method=PUT" method="POST">
+      <fieldset id="edituser">
         <div class="field is-horizontal">
           <!-- <div class="field-label is-normal">
             <label class="label" for="first_name">First name: </label>
@@ -128,40 +128,38 @@
           </div>
         </div>
 
-        <fieldset id="disabled" disabled>
-          <div class="field is-horizontal">
-            <div class="field-label is-normal">
-              <label class="label" for="book_bag">In Book Bag: </label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control is-expanded">
-                  <input class="input" type="text" name="book_bag" />
-                </div>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label" for="book_bag">In Book Bag: </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control is-expanded">
+                <input class="input" type="text" name="book_bag" />
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="field is-horizontal">
-            <div class="field-label is-normal">
-              <label class="label" for="completed">Completed: </label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control is-expanded">
-                  <input class="input" type="text" name="completed" />
-                </div>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label" for="completed">Completed: </label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control is-expanded">
+                <input class="input" type="text" name="completed" />
               </div>
             </div>
           </div>
-        </fieldset>
+        </div>
         <div class="field is-grouped is-grouped-centered">
           <div class="control">
             <input
               class="button is-primary"
               type="submit"
               name=""
-              value="Create User"
+              value="Edit User"
             />
           </div>
           <div class="control">

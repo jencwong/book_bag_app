@@ -1,12 +1,40 @@
 <% include ../partials/htmlHead.ejs %>
 <body>
-  <h2 id="greet">Hello <%=currentStudent.first_name%>!</h2>
+<% include ../partials/htmlHeader.ejs %>
+<div class="parent-container">
+    <div class="tabs">
+        <ul>
+          <nav
+            class="navbar columns"
+            role="navigation"
+            aria-label="main navigation"
+          >
+            <div class="navbar-start">
+              <li>
+                <a class="navbar-item" 
+                href="/home/student/<%=currentStudent.id%>/bookbag">My Book Bag</a></li>
+            </div>
+  
+            <div class="navbar-end">
+              <!-- <div class="buttons"> -->
+              <li><a class="navbar-item is-light" href="/home">Log Out</a></li>
+            </div>
+          </nav>
+        </ul>
+      </div>
 
-  <h3>Your reading level is: <%=currentStudent.reading_level%></h3>
 
-  <ul>
+
+
+  <h2 id="greet">Hello <strong><%=currentStudent.first_name%></strong></h2>
+
+  <h3>Your reading level is: 
+    <strong><%=currentStudent.reading_level%></strong></h3>
+
+  
   Here is your reading list: 
-  <fieldset>
+  <div class="content">
+  <ol type="1">
   <%for(i=0; i<books.length; i++){%>
   <li>
   <%=books[i].title%>
@@ -16,7 +44,7 @@
   <p>Not Available</p>
 <%} else if (currentStudent.book_bag.includes(books[i].title)){%>
   <form>
-    <input type="button" value="In Your Book Bag">
+    <input type="button" class="button is-info"value="In Your Book Bag">
   </form>
 
 <%}else {%>
@@ -25,18 +53,22 @@
   <label for="books[i].quantity"><%=books[i].quantity%> available
   </label>
   <input type="number" name="quantity" id="borrow"  value="<%=books[i].quantity%>"/>
-  <input type="submit" value="BORROW"/>
+  <input class="button is-primary" type="submit" value="BORROW"/>
 
 </form>
 <%}%>
 </li>
 <%}%>
-  </ul>
-</fieldset>
+  </ol>
+</div>
 
-<h3>In your book bag: <%=currentStudent.book_bag%></h3>
 
-  <nav><a href="/home">Log Out</a></nav>
+<h3>Books completed: <%=currentStudent.completed%></h3>
+
+
+</div>
+
+<% include ../partials/htmlFoot.ejs%>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="/scripts/main.js"></script>

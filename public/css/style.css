@@ -5,7 +5,8 @@
   background-size: cover;
 }
 
-#borrow {
+#borrow,
+#return {
   display: none;
 }
 
@@ -70,7 +71,9 @@ h1 {
 #newbook,
 #editbook,
 #deletebook,
-#deletestudent {
+#deletestudent,
+#newuser,
+#edituser {
   /* text-align: center; */
   width: 100%;
   padding: 5%;
@@ -81,6 +84,18 @@ h1 {
   border: none;
 }
 
+#disabled {
+  padding: 3%;
+  border: red solid 2px;
+}
+
+.is-grouped-centered {
+  padding: 2%;
+}
+
+/* .number-list {
+  list-style: ;
+} */
 /* label {
   width: 100%;
   text-align: ;

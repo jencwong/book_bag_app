@@ -1,14 +1,47 @@
 <% include ../partials/htmlHead.ejs %>
 
 <body>
+  <% include ../partials/htmlHeader.ejs %>
+  <div class="parent-container">
+      <div class="tabs">
+          <ul>
+            <nav
+              class="navbar columns"
+              role="navigation"
+              aria-label="main navigation"
+            >
+              <div class="navbar-start">
+                <li>
+                  <a class="navbar-item" 
+                  href="/home/student/<%=currentStudent.id%>">My Main Page</a></li>
+              </div>
+    
+              <div class="navbar-end">
+                <!-- <div class="buttons"> -->
+                <li><a class="navbar-item is-light" href="/home">Log Out</a></li>
+              </div>
+            </nav>
+          </ul>
+        </div>
 
-  <h2><%=currentStudent.first_name%>, you have this book in your book bag:</h2>
-  <br />
-  <ul>
+  <h2><%=currentStudent.first_name%>, book(s) inside your book bag:</h2>
+  <div class="content">
+  <ol type="1">
     <%for(i=0; i<currentStudent.book_bag.length; i++){%>
-    <li><%=currentStudent.book_bag[i]%></li></br>
-    <%}%>
-  </ul>
+    <li><%=currentStudent.book_bag[i]%>
+      <!-- add a button to return books here -->
+    <form action="/home/student/<%=currentStudent.id%>/books/<%=books[i].id%>/return?_method=PUT" method="POST">
+      
+      <input type="number" name="quantity" id="return"  value="<%=books[i].quantity%>"/>
+      <input class="button is-primary" type="submit" value="RETURN"/>
 
-  <a href="/home/student/<%=currentStudent.id%>">Back to Main Page</a><br />
+    </form>
+    </li>
+    <%}%>
+  </ol>
+</div>
+  
+ </div>
+
+<% include ../partials/htmlFoot.ejs%>
 </body>
