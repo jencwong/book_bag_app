@@ -175,119 +175,151 @@ userRouter.post("/teacher", (req, res) => {
 
 // set up book bag put route
 userRouter.put("/student/:stuID/books/:bookID/borrow", (req, res) => {
-  let bookQty = req.body.quantity;
-  req.body.quantity -= 1;
-  bookQty = req.body.quantity;
+  // let bookQty = req.body.quantity;
+  // req.body.quantity -= 1;
+  // bookQty = req.body.quantity;
+  // Book.findByIdAndUpdate(
+  //   req.params.bookID,
+  //   req.body,
+  //   { new: true },
+  //   (err, updatedQty) => {
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       let bookTitle = req.body.title;
+  //       Book.findByIdAndUpdate(
+  //         req.params.bookID,
+  //         req.body,
+  //         { new: true },
+  //         (err, foundBook) => {
+  //           if (err) {
+  //             console.log(err);
+  //           } else {
+  //             User.findByIdAndUpdate(
+  //               req.params.stuID,
+  //               // req.body,
+  //               { $push: { book_bag: foundBook.id } },
+  //               { new: true },
+  //               (err, foundStudent) => {
+  //                 if (err) {
+  //                   console.log(err);
+  //                 } else {
+  //                   // foundBook.forEach(book => {
+  //                   // foundStudent.book_bag.push(foundBook.title);
+  //                   console.log(foundStudent);
+  //                   console.log(foundStudent.book_bag);
+  //                   console.log(foundBook);
+  //                   res.render("../views/users/bookBag.ejs", {
+  //                     currentStudent: foundStudent,
+  //                     books: foundBook
+  //                     // const stuID = foundStudent.id;
+  //                     // res.redirect(`/home/student/${stuID}`);
+  //                   });
+  //                   // });
+  //                 }
+  //               }
+  //             );
+  //           }
+  //         }
+  //       );
+  //     }
+  //   }
+  // );
+
+  // const thisStudent = req.params.stuID;
+  // console.log(thisStudent);
+  // const thisBook = req.params.bookID;
+  // console.log(thisBook);
+  // const borrowQty = 1;
+  let thisBook;
   Book.findByIdAndUpdate(
     req.params.bookID,
-    req.body,
+    { $inc: { quantiy: -1 } },
     { new: true },
-    (err, updatedQty) => {
+    (err, foundBook) => {
       if (err) {
-        console.log(err);
+        console.log("Find Book Error", err);
       } else {
-        let bookTitle = req.body.title;
-        Book.findByIdAndUpdate(
-          req.params.bookID,
-          req.body,
-          { new: true },
-          (err, foundBook) => {
-            if (err) {
-              console.log(err);
-            } else {
-              User.findByIdAndUpdate(
-                req.params.stuID,
-                // req.body,
-                { $push: { book_bag: foundBook.title } },
-                { new: true },
-                (err, foundStudent) => {
-                  if (err) {
-                    console.log(err);
-                  } else {
-                    // foundBook.forEach(book => {
-                    // foundStudent.book_bag.push(foundBook.title);
-                    console.log(foundStudent);
-                    console.log(foundStudent.book_bag);
-                    console.log(foundBook);
-                    res.render("../views/users/bookBag.ejs", {
-                      currentStudent: foundStudent,
-                      books: foundBook
-                      // const stuID = foundStudent.id;
-                      // res.redirect(`/home/student/${stuID}`);
-                    });
-                    // });
-                  }
-                }
-              );
-            }
-          }
-        );
+        console.log("book", foundBook);
+        thisBook = foundBook;
+      }
+    }
+  );
+
+  User.findByIdAndUpdate(
+    req.params.stuID,
+    { $push: { book_bag: thisBook } },
+    (err, foundStudent) => {
+      if (err) {
+        console.log("Find Student Error:", foundStudent);
+      } else {
+        console.log("Found Student", foundStudent);
+        res.render("../views/users/bookBag.ejs", {
+          currentStudent: foundStudent,
+          books: thisBook
+        });
       }
     }
   );
 });
 
 // set up return book (edit) put route
-userRouter.put(
-  "/student/:stuID/:stuBookTitle/books/:bookTitle/return",
-  (req, res) => {
-    User.findByIdAndUpdate(
-      req.params.stuID,
-      // req.body,
-      { new: true },
-      (err, foundStudent) => {
-        if (err) {
-          console.log(err);
-        } else {
-          let foundBook = req.params.stuBookTitle;
-          User.findOneAndUpdate(
-            req.params.stuBookTitle,
-            {
-              $pull: { book_bag: foundBook.title },
-              $push: { completed: foundBook.title }
-            },
-            { new: true },
-            (err, foundBook) => {
-              if (err) {
-                console.log(err);
-              } else {
-                console.log(foundStudent);
-                console.log(foundStudent.completed);
-                console.log(foundBook);
-                let bookTitle = foundBook.title;
-                Book.findOneAndUpdate(
-                  req.params.bookTitle,
-                  // req.body,
-                  { new: true },
-                  (err, foundBook) => {
-                    if (err) {
-                      console.log(err);
-                    } else {
-                      // let bookQty = req.body.quantity;
-                      // req.body.quantity += 1;
-                      // bookQty = req.body.quantity;
-                      console.log(foundStudent);
-                      console.log(foundStudent.completed);
-                      console.log(foundBook);
-                      const stuID = foundStudent.id;
-                      res.redirect(`/home/student/${stuID}`);
-                      // , {
-                      //   currentStudent: foundStudent,
-                      //   books: foundBook
-
-                      // res.redirect(`/home/student/${stuID}`);
-                    }
-                    // });
-                  }
-                );
-              }
-            }
-          );
-        }
-      }
-    );
-  }
-);
+userRouter.put("/student/:stuID/books/:bookID/return", (req, res) => {
+  //   User.findByIdAndUpdate(
+  //     req.params.stuID,
+  //     // req.body,
+  //     { new: true },
+  //     (err, foundStudent) => {
+  //       if (err) {
+  //         console.log(err);
+  //       } else {
+  //         let foundBook = req.params.stuBookTitle;
+  //         User.findOneAndUpdate(
+  //           req.params.stuBookTitle,
+  //           {
+  //             $pull: { book_bag: foundBook },
+  //             $push: { completed: foundBook }
+  //           },
+  //           { new: true },
+  //           (err, foundBook) => {
+  //             if (err) {
+  //               console.log(err);
+  //             } else {
+  //               console.log(foundStudent);
+  //               console.log(foundStudent.completed);
+  //               console.log(foundBook);
+  //               let bookTitle = foundBook.title;
+  //               Book.findOneAndUpdate(
+  //                 req.params.bookTitle,
+  //                 // req.body,
+  //                 { new: true },
+  //                 (err, foundBook) => {
+  //                   if (err) {
+  //                     console.log(err);
+  //                   } else {
+  //                     // let bookQty = req.body.quantity;
+  //                     // req.body.quantity += 1;
+  //                     // bookQty = req.body.quantity;
+  //                     console.log(foundStudent);
+  //                     console.log(foundStudent.completed);
+  //                     console.log(foundBook);
+  //                     const stuID = foundStudent.id;
+  //                     res.redirect(`/home/student/${stuID}`);
+  //                     // , {
+  //                     //   currentStudent: foundStudent,
+  //                     //   books: foundBook
+  //                     // res.redirect(`/home/student/${stuID}`);
+  //                   }
+  //                   // });
+  //                 }
+  //               );
+  //             }
+  //           }
+  //         );
+  //       }
+  //     }
+  //   );
+});
 
 // Edit Student Put Route
 userRouter.put("/teacher/:stuID", (req, res) => {
