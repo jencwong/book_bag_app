@@ -1,6 +1,12 @@
 $(() => {
+
+  // $(“#symptoms”).change(() => {
+  //   const endpoint = “https://patientsportal.herokuapp.com/symptoms/all“;
+
+
+
   console.log("hi");
-  $.ajax("http://localhost:3000/home/classroom").then(data => {
+  $.ajax("https://book-bag-app.herokuapp.com/home/classroom").then(data => {
     console.log("Server Sent: ", data);
     data.forEach(student => {
       const $newRow = $("<tr>").appendTo("#reading_report");
